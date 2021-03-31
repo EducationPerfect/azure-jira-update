@@ -4,11 +4,12 @@ parameters:
     - name: JiraEnvironment
       type: string
 steps:
+    - checkout: JiraDeployInfo
     - task: PowerShell@2
       inputs:
         pwsh: true
         targetType: filePath
-        filePath: 'DeploymentScript.ps1'
+        filePath: DeploymentScript.ps1
       env:
         SYSTEM_ACCESSTOKEN: $(System.AccessToken)
         ATLASSIAN_CLIENT_ID: $(AtlassianClientId)

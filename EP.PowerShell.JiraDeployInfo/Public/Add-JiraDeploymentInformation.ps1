@@ -130,6 +130,15 @@ function Add-JiraDeploymentInformation {
         $Product = "PowerShell"
     )
 
+    $stateTypes = @{
+        "Unknown"    = "unknown";
+        "InProgress" = "in_progress";
+        "Cancelled"  = "cancelled";
+        "Failed"     = "failed";
+        "RolledBack" = "rolled_back";
+        "Successful" = "successful"
+    }
+
     $bodyObject = @{ # https://developer.atlassian.com/cloud/jira/software/rest/api-group-deployments/#api-deployments-0-1-bulk-post
         deployments      = @(
             @{
@@ -146,7 +155,7 @@ function Add-JiraDeploymentInformation {
                 description              = $Description;
                 lastUpdated              = (Get-Date).ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ss.fffK");
                 label                    = $Label;
-                state                    = $State.ToLower();
+                state                    = $stateTypes[$State];
                 pipeline                 = @{
                     id          = $PipelineId;
                     displayName = $PipelineDisplayName;

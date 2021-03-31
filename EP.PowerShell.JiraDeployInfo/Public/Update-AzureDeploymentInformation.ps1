@@ -18,7 +18,7 @@ function Update-AzureDeploymentInformation {
     .PARAMETER State
     The state to set the Jira deployment information to
     
-    .PARAMETER Type
+    .PARAMETER EnvironmentType
     The deploy type to set the deployment information to.
 
     .PARAMETER DisplayName
@@ -68,9 +68,6 @@ function Update-AzureDeploymentInformation {
 
         [ValidateSet("Unknown", "Pending", "InProgress", "Cancelled", "Failed", "RolledBack", "Successful")]
         [string] $State = "Unknown",
-        
-        [ValidateSet("Unmapped", "Development", "Testing", "Staging", "Production")]
-        [string] $Type = "Unmapped",
 
         [Parameter(Mandatory=$false)]
         [ValidateNotNullOrEmpty()]
@@ -96,6 +93,9 @@ function Update-AzureDeploymentInformation {
         [ValidateNotNullOrEmpty()]
         [string]
         $EnvironmentDisplayName = $env:ENVIRONMENT_NAME,
+
+        [ValidateSet("Unmapped", "Development", "Testing", "Staging", "Production")]
+        [string] $EnvironmentType = "Unmapped",
 
         [Parameter(Mandatory=$false)]
         [ValidateNotNullOrEmpty()]
@@ -134,7 +134,7 @@ function Update-AzureDeploymentInformation {
         Url                     = $Url
         
         EnvironmentId           = $EnvironmentId
-        EnvironmentType         = $Type
+        EnvironmentType         = $EnvironmentType
         EnvironmentDisplayName  = $EnvironmentDisplayName
 
         PipelineId              = $PipelineId

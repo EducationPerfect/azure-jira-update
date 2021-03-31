@@ -8,8 +8,9 @@ Set the following variables in your AzureDevops job :
 - JiraDomain : companyname.atlassian.net
 
 ```yaml
-repositories:
-- repository: JiraDeployInfo
+resources:
+  repositories:
+  - repository: JiraDeployInfo
     type: github
     name: educationperfect/azure-jira-update
 ...
@@ -19,18 +20,18 @@ repositories:
           runOnce:
             preDeploy:
               steps:
-                - {template: update-jira.yml@JiraDeployInfo, parameters: { JiraState: "Pending", JiraEnvironment: "Testing", JiraDomain: "companyname.atlassian.net" }} 
+                - {template: update-jira.yml@JiraDeployInfo, parameters: { JiraState: "Pending", JiraEnvironment: "Testing"}} 
                 # JiraState can be one of "Unknown", "Pending", "InProgress", "Cancelled", "Failed", "RolledBack", "Successful"
                 # JiraEnvironment can one of "Unmapped", "Development", "Testing", "Staging", "Production"
             on:
               failure:
                 steps:
-                  - {template: update-jira.yml@JiraDeployInfo, parameters: { JiraState: "Failed", JiraEnvironment: "Testing", JiraDomain: "companyname.atlassian.net" }}
+                  - {template: update-jira.yml@JiraDeployInfo, parameters: { JiraState: "Failed", JiraEnvironment: "Testing" }}
               success: 
                 steps:
-                  - {template: update-jira.yml@JiraDeployInfo, parameters: { JiraState: "Successful", JiraEnvironment: "Testing", JiraDomain: "companyname.atlassian.net" }}
+                  - {template: update-jira.yml@JiraDeployInfo, parameters: { JiraState: "Successful", JiraEnvironment: "Testing" }}
             deploy:
               steps:
-                - {template: update-jira.yml@JiraDeployInfo, parameters: { JiraState: "InProgress", JiraEnvironment: "Testing", JiraDomain: "companyname.atlassian.net" }}
+                - {template: update-jira.yml@JiraDeployInfo, parameters: { JiraState: "InProgress", JiraEnvironment: "Testing" }}
                 ...
 ```
