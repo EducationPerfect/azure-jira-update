@@ -1,20 +1,18 @@
-Usage
-==
-
-Set the following variables in your AzureDevops job : 
-
-- AtlassianClientId from : https://companyname.atlassian.net/secure/admin/oauth-credentials
-- AtlassianClientSecret from : https://companyname.atlassian.net/secure/admin/oauth-credentials
-- JiraDomain : companyname.atlassian.net
-
-```yaml
+trigger: none
 repositories:
 - repository: JiraDeployInfo
     type: github
     name: educationperfect/azure-jira-update
-...
-  jobs:
-      - deployment: ...
+stages:
+  - stage: DeployTest
+    jobs:
+      - deployment: Test
+        environment: "testjira"
+        pool:
+          name: Generic Linux Agents
+          demands: docker
+        workspace:
+          clean: all
         strategy:
           runOnce:
             preDeploy:
@@ -33,4 +31,3 @@ repositories:
               steps:
                 - {template: update-jira.yml@JiraDeployInfo, parameters: { JiraState: "InProgress", JiraEnvironment: "Testing", JiraDomain: "companyname.atlassian.net" }}
                 ...
-```

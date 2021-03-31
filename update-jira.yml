@@ -3,8 +3,6 @@ parameters:
       type: string
     - name: JiraEnvironment
       type: string
-    - name: JiraDomain
-      type: string
 steps:
     - task: PowerShell@2
       inputs:
@@ -17,5 +15,5 @@ steps:
         ATLASSIAN_CLIENT_SECRET: $(AtlassianClientSecret)
         JIRA_STATE: "${{ parameters.JiraState }}"
         JIRA_ENVIRONMENT: "${{ parameters.JiraEnvironment }}"
-        JIRA_DOMAIN: "${{ parameters.JiraDomain }}"
+        JIRA_DOMAIN: $(JiraDomain)
       continueOnError: true 
