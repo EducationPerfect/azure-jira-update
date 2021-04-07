@@ -6,6 +6,7 @@ parameters:
 steps:
     - checkout: JiraDeployInfo
     - task: PowerShell@2
+      displayName: Update JIRA status
       inputs:
         pwsh: true
         targetType: filePath

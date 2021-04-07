@@ -132,6 +132,7 @@ function Add-JiraDeploymentInformation {
 
     $stateTypes = @{
         "Unknown"    = "unknown";
+        "Pending"    = "pending";
         "InProgress" = "in_progress";
         "Cancelled"  = "cancelled";
         "Failed"     = "failed";
