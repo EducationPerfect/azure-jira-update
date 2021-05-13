@@ -21,6 +21,7 @@ resources:
   - repository: JiraDeployInfo
     type: github
     name: educationperfect/azure-jira-update
+    endpoint: NameOfYourAzureDevOpsGithubServiceConnection
 ...
   jobs:
       - deployment: ...
