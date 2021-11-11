@@ -143,7 +143,7 @@ function Add-JiraDeploymentInformation {
     $bodyObject = @{ # https://developer.atlassian.com/cloud/jira/software/rest/api-group-deployments/#api-deployments-0-1-bulk-post
         deployments      = @(
             @{
-                deploymentSequenceNumber = [Int](Get-Date -UFormat "%s");
+                deploymentSequenceNumber = [Int]($env:BUILD_BUILDID);
                 updateSequenceNumber     = [Int](Get-Date -UFormat "%s");
                 associations             = @(
                     @{
