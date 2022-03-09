@@ -178,6 +178,6 @@ function Add-JiraDeploymentInformation {
     $body = (New-Object PSObject -Property $bodyObject | ConvertTo-Json -Depth 100)
 
     $response = Invoke-RestMethod -uri "https://api.atlassian.com/jira/deployments/0.1/cloud/$(Get-AtlassianCloudId -JiraDomain $JiraDomain)/bulk" -Method POST -Body $body -ContentType "application/json" -Headers @{"Authorization" = "Bearer $(Get-AtlassianBearerToken -AtlassianClientId $AtlassianClientId -AtlassianClientSecret $AtlassianClientSecret )" }
-    Write-Debug ("[Deployment Reponse] " + ($response | ConvertTo-Json -Depth 100))
+    Write-Verbose ("[Deployment Reponse] " + ($response | ConvertTo-Json -Depth 100))
     $response
 }

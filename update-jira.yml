@@ -16,6 +16,7 @@ steps:
         targetType: filePath
         filePath: DeploymentScript.ps1
         workingDirectory: "${{ parameters.workingDirectory }}"
+        verbosePreference: "continue"
       env:
         SYSTEM_ACCESSTOKEN: $(System.AccessToken)
         ATLASSIAN_CLIENT_ID: $(AtlassianClientId)
